@@ -1,0 +1,41 @@
+#%RAML 0.8
+baseUri: http://server/api/{version}
+title: Wiki Management API
+mediaType: application/json
+version: v1
+documentation:
+ - title: Overview
+   content: |
+     User Wiki API Overview
+traits:
+  - formatted:
+      queryParameters:
+        format:
+          description: Response format
+          enum: [json, xml]
+          default: json
+          required: false
+  - paginated:
+      queryParameters:
+        page:
+          description: Page number
+          default: 1
+          required: false
+        per_page:
+          description: Per page
+          default: 5
+          required: false
+/documents:
+  is: [formatted, paginated]
+  description: Document management
+  get:
+    description: List of all documents available to user
+    queryParameters:
+      space_id:
+        description: Space id
+	required: false
+    responses:
+      200:
+        body:
+          schema: !include documents-schema.json
+          example: !include documents_index.json
