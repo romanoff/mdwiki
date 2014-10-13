@@ -33,9 +33,25 @@ traits:
     queryParameters:
       space_id:
         description: Space id
-	required: false
+        required: false
     responses:
       200:
         body:
           schema: !include documents-schema.json
           example: !include documents_index.json
+  post:
+    description: Create new document
+    queryParameters:
+      space_id:
+        description: Space id
+        required: true
+        example: 1
+      name:
+        description: Document name
+        required: true
+        example: Code style
+    responses:
+      200:
+        body:
+          schema: !include document-schema.json
+          example: !include document.json
